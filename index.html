@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Is Your Internet Slow?</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background: linear-gradient(135deg, #89f7fe, #66a6ff);
+      font-family: "Poppins", sans-serif;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: white;
+      font-size: 40px;
+      text-shadow: 0 0 10px rgba(255,255,255,0.7);
+      margin-bottom: 50px;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    button {
+      padding: 15px 35px;
+      font-size: 22px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+      position: absolute;
+    }
+
+    #yesBtn {
+      background-color: #ff4d6d;
+      color: white;
+      left: 40%;
+      top: 60%;
+      box-shadow: 0 0 15px rgba(255, 77, 109, 0.7);
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 25px rgba(255, 77, 109, 1);
+    }
+
+    #noBtn {
+      background-color: #4CAF50;
+      color: white;
+      left: 55%;
+      top: 60%;
+      box-shadow: 0 0 15px rgba(76, 175, 80, 0.7);
+    }
+
+    /* فقاعات بالخلفية */
+    .bubble {
+      position: absolute;
+      background: rgba(255,255,255,0.5);
+      border-radius: 50%;
+      animation: rise 6s infinite ease-in-out;
+    }
+
+    @keyframes rise {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-200px) scale(1.5); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Is your internet slow? 🌐🐌</h1>
+
+  <button id="yesBtn">YES</button>
+  <button id="noBtn" onclick="alert('Good! 😄')">NO</button>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+
+    function moveButton() {
+      const x = Math.random() * (window.innerWidth - 150);
+      const y = Math.random() * (window.innerHeight - 150);
+
+      yesBtn.style.left = x + "px";
+      yesBtn.style.top = y + "px";
+    }
+
+    // للكمبيوتر
+    yesBtn.addEventListener("mouseover", moveButton);
+
+    // للموبايل
+    yesBtn.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      moveButton();
+    });
+
+    // لو حاولت تضغط بسرعة
+    yesBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      moveButton();
+    });
+
+    // فقاعات بالخلفية
+    function createBubble() {
+      const bubble = document.createElement("div");
+      bubble.classList.add("bubble");
+      const size = 20 + Math.random() * 40;
+      bubble.style.width = size + "px";
+      bubble.style.height = size + "px";
+      bubble.style.left = Math.random() * window.innerWidth + "px";
+      bubble.style.top = window.innerHeight + "px";
+      document.body.appendChild(bubble);
+
+      setTimeout(() => bubble.remove(), 6000);
+    }
+
+    setInterval(createBubble, 500);
+  </script>
+
+</body>
+</html>
